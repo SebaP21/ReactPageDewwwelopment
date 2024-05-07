@@ -1,75 +1,124 @@
-import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-import {
-	FormComponent,
-	FormComponentProps,
-} from "./FormComponent/FormComponent";
+type FormFields = {
+	name: string;
+	surname: string;
+	email: string;
+	tel: number;
+	message: string;
+};
 
-export const Form = () => {
-	const [values, setValues] = useState({
-		name: "",
-		surname: "",
-		email: "",
-		tel: "",
-	});
+export const ContactForm = () => {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isSubmitting },
+	} = useForm<FormFields>();
 
-	const handleSubmit = (e: any) => {
-		e.preventDefault();
-	};
-
-	const onChange = (e:any) => {
-		setValues({ ...values, [e.target.name]: e.target.value });
+	const onSubmit: SubmitHandler<FormFields> = async (data) => {
+		await new Promise((resolve) => setTimeout(resolve, 500));
+		console.log(data);
 	};
 
 	return (
-		<div
-			className='contact-form'
-			onSubmit={handleSubmit}
-		>
-			{inputs.map((input) => (
-				<FormComponent
-					key={input.id}
-					{...input}
-					// value={values[input.name]}
-					// onChange={onChange}
+		<>
+			<div className='alert'>
+				{errors.name && (
+					<div className='error-messages'>{errors.name.message} </div>
+				)}
+				{errors.surname && (
+					<div className='error-messages'>{errors.surname.message}</div>
+				)}
+				{errors.email && (
+					<div className='error-messages'>{errors.email.message}</div>
+				)}
+				{errors.tel && (
+					<div className='error-messages'>{errors.tel.message}</div>
+				)}
+				{errors.message && (
+					<div className='error-messages'>{errors.message.message}</div>
+				)}
+			</div>
+
+			<form
+				className='contact-form'
+				onSubmit={handleSubmit(onSubmit)}
+			>
+				<input
+					{...register("name", { required: "Podaj swoje imię" })}
+					type='text'
+					placeholder='Imię'
 				/>
-			))}
-		</div>
+
+				<input
+					{...register("surname", { required: "Nazwisko jest wymagane" })}
+					type='text'
+					placeholder='Nazwisko'
+				/>
+
+				<input
+					{...(register("email"), { required: true })}
+					type='email'
+					placeholder='Adres e-mail'
+				/>
+
+				<input
+					{...register("tel", {
+						required: "Podaj swój numer telefonu",
+						minLength: {
+							value: 9,
+							message: "Numer powinien składać się z min 9 cyfr",
+						},
+					})}
+					type='tel'
+					placeholder='Numer telefonu'
+				/>
+
+				<div className='message-area'>
+					<input
+						className='message-area'
+						{...register("message", {
+							required: "Uzupełnij wiadomość!",
+							minLength: 5,
+						})}
+						type='text'
+						placeholder='Wiadomość'
+					/>
+				</div>
+
+				<div className='contact-form'>
+					<button
+						disabled={isSubmitting}
+						type='submit'
+						className='btn btn-send'
+					>
+						{isSubmitting ? "Wysyłanie" : "Wyślij wiadomość"}
+					</button>
+				</div>
+			</form>
+		</>
 	);
 };
 
-const inputs: FormComponentProps[] = [
-	{
-		id: 1,
-		name: "name",
-		type: "text",
-		placeholder: "Imię",
-		errorMessage: "Wpisz swoje imię",
-		required: true,
-	},
-	{
-		id: 2,
-		name: "surname",
-		type: "text",
-		placeholder: "Nazwisko",
-		errorMessage: "Wpisz swoje nazwisko",
-		required: true,
-	},
-	{
-		id: 3,
-		name: "email",
-		type: "email",
-		placeholder: "Adres e-mail",
-		errorMessage: "Upsss.. Twój adres e-mail nie jest poprawny",
-		required: true,
-	},
-	{
-		id: 3,
-		name: "tel",
-		type: "tel",
-		placeholder: "Telefon",
-		errorMessage:
-			"Twój telefon nie jest poprawny (min.9 znaków / może zawierać jedynie cyfry",
-		required: true,
-	},
-];
+//pattern
+//validate:(value) => value.includes("@")
+
+// const ContactFormResult: FC<FormFields> = ({
+// 	name,
+// 	surname,
+// 	email,
+// 	tel,
+// 	message,
+// }) => {
+// 	return (
+// 		<div className='form-result'>
+// 			<div className='result'>
+// 				<p>{name}</p>
+// 				<p></p>
+// 				<p></p>
+// 				<p></p>
+// 				<p></p>
+// 			</div>
+// 		</div>
+// 	);
+// };

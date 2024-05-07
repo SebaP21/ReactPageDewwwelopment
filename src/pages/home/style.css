@@ -465,18 +465,18 @@ header {
 	border: 1px solid transparent;
 	font-family: "Hind", sans-serif;
 }
-
-.contact-form textarea {
-	min-height: 15vh;
-	max-height: 15vh;
-	padding: 2em;
-	margin: 1em 0;
-	min-width: 90%;
-	max-width: 90%;
-	background-color: var(--medium-light-color);
-	border: 1px solid transparent;
-	font-family: "Hind", sans-serif;
+.message-area{
+	display: flex;
+	justify-content: center;
 }
+.message-area input{
+	min-width: 90%;
+	min-height:14vh;
+	
+	
+
+}
+
 
 .alert {
 	margin-top: 2em;
@@ -488,15 +488,22 @@ header {
 	margin-right: 3em;
 	font-weight: bold;
 }
+.error-messages{
+	color: var(--alert-color);
+	padding-bottom: 1em;
+}
+.message-area {
+	min-width: 100%;
+}
 
 .form-result {
 	position: absolute;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
+	width: 50%;
 	height: 80%;
-	bottom: 0;
+	bottom: 10%;
 	align-self: center;
 	background-color: var(--nav-main-color);
 	animation: fade-up 1s;

@@ -275,3 +275,14 @@
 	border: none;
 	animation: rotate-button 0.5s;
 }
+
+.test-section{
+	width: 100%;
+	min-height: 100vh;
+	background-color: #333;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}

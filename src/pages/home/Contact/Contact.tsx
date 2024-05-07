@@ -1,17 +1,8 @@
-import { Form } from "react-router-dom";
 import { SectionHeading } from "../../../Components/SectionHeading/SectionHeading";
 import logo from "../../../assets/img/dewwwelopment-low-resolution-logo-black-on-transparent-background-3.png";
+import { ContactForm } from "./Form/Form";
 
 export const Contact = () => {
-
-	
-
-
-
-
-
-
-
 	return (
 		<>
 			<section
@@ -46,8 +37,8 @@ export const Contact = () => {
 						<a href='mailto:mail@mail.com'>@mail</a>
 					</div>
 					<div className='contact-form'>
-						<Form/>
-						<button className='btn btn-send'>Wyślij wiadomość</button>
+						<ContactForm/>
+						
 					</div>
 				</div>
 			</section>
@@ -55,7 +46,8 @@ export const Contact = () => {
 	);
 };
 
-{/* <input
+{
+	/* <input
 	type='text'
 	id='name'
 	placeholder='Imię'
@@ -79,4 +71,5 @@ export const Contact = () => {
 	name='message'
 	id='message'
 	placeholder='Wiadomość'
-></textarea> */}
+></textarea> */
+}

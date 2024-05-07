@@ -5,6 +5,7 @@ import { CtaSteps } from "./pages/home/CtaSteps/CTASteps";
 import { Steps } from "./pages/home/StepsForWeb/Steps";
 import { Faq } from "./pages/home/FAQ/Faq";
 import { Contact } from "./pages/home/Contact/Contact";
+import { TestSection } from "./Components/TestingSection/TestingSection";
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 			<Steps />
 			<Faq />
 			<Contact />
+			<TestSection/>
 		</>
 	);
 }
