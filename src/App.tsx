@@ -17,7 +17,7 @@ function App() {
 			<Steps />
 			<Faq />
 			<Contact />
-			<TestSection/>
+			{/* <TestSection/> */}
 		</>
 	);
 }

@@ -37,8 +37,7 @@ export const Contact = () => {
 						<a href='mailto:mail@mail.com'>@mail</a>
 					</div>
 					<div className='contact-form'>
-						<ContactForm/>
-						
+						<ContactForm />
 					</div>
 				</div>
 			</section>
@@ -46,30 +45,5 @@ export const Contact = () => {
 	);
 };
 
-{
-	/* <input
-	type='text'
-	id='name'
-	placeholder='Imię'
-/>
-<input
-	type='text'
-	id='surname'
-	placeholder='Nazwisko'
-/>
-<input
-	type='text'
-	id='email'
-	placeholder='Adres e-mail'
-/>
-<input
-	type='text'
-	id='tel'
-	placeholder='Telefon'
-/>
-<textarea
-	name='message'
-	id='message'
-	placeholder='Wiadomość'
-></textarea> */
-}
+
+	

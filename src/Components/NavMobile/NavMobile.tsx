@@ -52,7 +52,7 @@ export const MobileNav = () => {
 						<a href='#aboutus'>o nas</a>
 					</li>
 					<li>
-						<Link to="/offer">Oferta</Link>
+						<Link to='/offer'>Oferta</Link>
 					</li>
 					<li>
 						<a href='#faq'>faq</a>

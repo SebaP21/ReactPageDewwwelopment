@@ -17,63 +17,80 @@ export const ContactForm = () => {
 
 	const onSubmit: SubmitHandler<FormFields> = async (data) => {
 		await new Promise((resolve) => setTimeout(resolve, 500));
-		console.log(data);
+		// ResultForm(data);
+		console.log(
+			`Twoja wiadomość od ${data.name} ${data.surname}: ${data.message}. Dane do kontaktu: * adres e-mail: ${data.email}, *tel: ${data.tel} `
+		);
+		alert("Wiadomość w konsoli!");
 	};
 
 	return (
 		<>
-			<div className='alert'>
-				{errors.name && (
-					<div className='error-messages'>{errors.name.message} </div>
-				)}
-				{errors.surname && (
-					<div className='error-messages'>{errors.surname.message}</div>
-				)}
-				{errors.email && (
-					<div className='error-messages'>{errors.email.message}</div>
-				)}
-				{errors.tel && (
-					<div className='error-messages'>{errors.tel.message}</div>
-				)}
-				{errors.message && (
-					<div className='error-messages'>{errors.message.message}</div>
-				)}
-			</div>
-
 			<form
 				className='contact-form'
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				<input
-					{...register("name", { required: "Podaj swoje imię" })}
-					type='text'
-					placeholder='Imię'
-				/>
+				<div className='inputs-wrapper'>
+					<div className='inputs'>
+						<input
+							{...register("name", {
+								required: "Podaj swoje imię",
+								minLength: 3,
+							})}
+							type='text'
+							placeholder='Imię'
+						/>
+						{errors.name && (
+							<div className='error-messages'>{errors.name.message} </div>
+						)}
+					</div>
 
-				<input
-					{...register("surname", { required: "Nazwisko jest wymagane" })}
-					type='text'
-					placeholder='Nazwisko'
-				/>
+					<div className='inputs'>
+						<input
+							{...register("surname", { required: "Nazwisko jest wymagane" })}
+							type='text'
+							placeholder='Nazwisko'
+						/>
+						{errors.surname && (
+							<div className='error-messages'>{errors.surname.message}</div>
+						)}
+					</div>
+				</div>
 
-				<input
-					{...(register("email"), { required: true })}
-					type='email'
-					placeholder='Adres e-mail'
-				/>
-
-				<input
-					{...register("tel", {
-						required: "Podaj swój numer telefonu",
-						minLength: {
-							value: 9,
-							message: "Numer powinien składać się z min 9 cyfr",
-						},
-					})}
-					type='tel'
-					placeholder='Numer telefonu'
-				/>
-
+				<div className='inputs-wrapper'>
+					<div className='inputs'>
+						<input
+							{...register("email", {
+								required: "Podaj swój adres e-mail",
+								pattern: {
+									value: /^[^@]+@[^@]+\.[^@]+$/,
+									message: "Podany adres e-mail jest nieprawidłowy",
+								},
+							})}
+							type='text'
+							placeholder='Adres e-mail'
+						/>
+						{errors.email && (
+							<div className='error-messages'>{errors.email.message}</div>
+						)}
+					</div>
+					<div className='inputs'>
+						<input
+							{...register("tel", {
+								required: "Podaj swój numer telefonu",
+								pattern: {
+									value: /^\+?[1-9][0-9]{7,14}$/,
+									message: "Numer powinien składać się z min 9 cyfr",
+								},
+							})}
+							type='tel'
+							placeholder='Numer telefonu'
+						/>
+						{errors.tel && (
+							<div className='error-messages'>{errors.tel.message}</div>
+						)}
+					</div>
+				</div>
 				<div className='message-area'>
 					<input
 						className='message-area'
@@ -84,6 +101,9 @@ export const ContactForm = () => {
 						type='text'
 						placeholder='Wiadomość'
 					/>
+					{errors.message && (
+						<div className='error-messages'>{errors.message.message}</div>
+					)}
 				</div>
 
 				<div className='contact-form'>
@@ -103,22 +123,15 @@ export const ContactForm = () => {
 //pattern
 //validate:(value) => value.includes("@")
 
-// const ContactFormResult: FC<FormFields> = ({
-// 	name,
-// 	surname,
-// 	email,
-// 	tel,
-// 	message,
-// }) => {
-// 	return (
-// 		<div className='form-result'>
-// 			<div className='result'>
-// 				<p>{name}</p>
-// 				<p></p>
-// 				<p></p>
-// 				<p></p>
-// 				<p></p>
-// 			</div>
+// export const ResultForm: FC<FormFields> = (data) => {
+// 	return(
+// 	<div className='form-result'>
+// 		<div className='result'>
+// 			<p>{data.name}</p>
+// 			<p>{data.surname}</p>
+// 			<p>{data.email}</p>
+// 			<p>{data.tel}</p>
+// 			<p>{data.message}</p>
 // 		</div>
-// 	);
-// };
+// 	</div>
+// );}

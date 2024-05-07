@@ -421,7 +421,7 @@ header {
 
 .contact-items {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-around;
 	flex-direction: column;
 	text-align: center;
 	flex-wrap: wrap;
@@ -457,28 +457,42 @@ header {
 }
 
 .contact-form input {
-	min-width: 40%;
-	max-width: 40%;
+	min-width: 80%;
+	max-width: 100%;
 	padding: 2em;
 	margin: 1em auto;
 	background-color: var(--medium-light-color);
 	border: 1px solid transparent;
 	font-family: "Hind", sans-serif;
 }
-.message-area{
+.message-area {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 }
-.message-area input{
+.message-area input {
 	min-width: 90%;
-	min-height:14vh;
-	
-	
-
+	min-height: 14vh;
 }
 
+.message-area .error-messages {
+	text-align: center;
+}
+.inputs {
+	min-width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	text-align: center;
+}
 
-.alert {
+.inputs-wrapper {
+	display: flex;
+	justify-content: center;
+	min-width: 100%;
+}
+
+/* .alert {
 	margin-top: 2em;
 	color: var(--alert-color);
 	text-align: center;
@@ -487,10 +501,11 @@ header {
 	padding: 0em 2em;
 	margin-right: 3em;
 	font-weight: bold;
-}
-.error-messages{
+} */
+.error-messages {
 	color: var(--alert-color);
-	padding-bottom: 1em;
+	font-weight: 500;
+	animation: fade-up 0.5s;
 }
 .message-area {
 	min-width: 100%;
