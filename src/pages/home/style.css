@@ -519,7 +519,8 @@ header {
 	width: 50%;
 	height: 80%;
 	bottom: 10%;
-	align-self: center;
+	margin: 0 auto;
+	/* align-self: center; */
 	background-color: var(--nav-main-color);
 	animation: fade-up 1s;
 }
@@ -535,6 +536,7 @@ header {
 	font-size: 2rem;
 	text-align: center;
 	padding: 2em;
+	align-self: center;
 }
 
 .footer-home {

@@ -1,4 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useState } from "react";
 
 type FormFields = {
 	name: string;
@@ -9,6 +10,8 @@ type FormFields = {
 };
 
 export const ContactForm = () => {
+	const [submittedData, setSubmittedData] = useState<FormFields | undefined>();
+
 	const {
 		register,
 		handleSubmit,
@@ -17,15 +20,31 @@ export const ContactForm = () => {
 
 	const onSubmit: SubmitHandler<FormFields> = async (data) => {
 		await new Promise((resolve) => setTimeout(resolve, 500));
-		// ResultForm(data);
 		console.log(
 			`Twoja wiadomość od ${data.name} ${data.surname}: ${data.message}. Dane do kontaktu: * adres e-mail: ${data.email}, *tel: ${data.tel} `
 		);
-		alert("Wiadomość w konsoli!");
+		setSubmittedData(data);
 	};
 
 	return (
 		<>
+			{submittedData && (
+				<div className='form-result'>
+					<div className='result'>
+						<p>{submittedData.name}</p>
+						<p>{submittedData.surname}</p>
+						<p>{submittedData.tel}</p>
+						<p>{submittedData.email}</p>
+						<p>{submittedData.message}</p>
+						<button
+							className='btn'
+							onClick={() => setSubmittedData(undefined)}
+						>
+							Potwierdź
+						</button>
+					</div>
+				</div>
+			)}
 			<form
 				className='contact-form'
 				onSubmit={handleSubmit(onSubmit)}
@@ -122,16 +141,3 @@ export const ContactForm = () => {
 
 //pattern
 //validate:(value) => value.includes("@")
-
-// export const ResultForm: FC<FormFields> = (data) => {
-// 	return(
-// 	<div className='form-result'>
-// 		<div className='result'>
-// 			<p>{data.name}</p>
-// 			<p>{data.surname}</p>
-// 			<p>{data.email}</p>
-// 			<p>{data.tel}</p>
-// 			<p>{data.message}</p>
-// 		</div>
-// 	</div>
-// );}

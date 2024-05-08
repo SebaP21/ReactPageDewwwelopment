@@ -6,21 +6,27 @@ import Five from "../../../assets/icons/five (1).svg";
 import Six from "../../../assets/icons/six-1.svg";
 import { StepCard } from "./Stepscard/StepsCard";
 import { StepsCardProps } from "./Stepscard/StepsCard";
-// import { useInView } from "react-intersection-observer";
-
+import { useInView } from "react-intersection-observer";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../../context/AppContext";
 
 export const Steps = () => {
-	// const{ref:Steps,inView} =useInView()
+	const { ref, inView } = useInView();
 
-	// inView&& console.log('ok');
+	const { setNavBackgroundColor } = useContext(AppContext);
 
-
+	useEffect(() => {
+		if (inView) {
+			setNavBackgroundColor("break-color");
+		}
+	}, [inView, setNavBackgroundColor]);
 
 	return (
 		<>
 			<section
 				className='steps-for-website'
 				id='steps'
+				ref={ref}
 			>
 				{stepsCardsData.map((data, index) => (
 					<StepCard

@@ -1,1 +1,2 @@
-export const OfferBtn = () => <button className='btn'>Dowiedz się więcej</button>
+
+export const OfferBtn = () => <button className='btn'>Dowiedz się więcej </button>

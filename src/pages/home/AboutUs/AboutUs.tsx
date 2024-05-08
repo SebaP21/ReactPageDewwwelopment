@@ -1,12 +1,27 @@
-import { idText } from "typescript";
 import picture from "../../../assets/img/Dewwwelopment-projektowanie.jpg";
 import logo from "../../../assets/img/dewwwelopment-low-resolution-logo-white-on-transparent-background (2).png";
+import { useInView } from "react-intersection-observer";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../../context/AppContext";
 
 export const About = () => {
+	const { ref, inView } = useInView({
+		threshold: 0.2,
+	});
+
+	const { setNavBackgroundColor } = useContext(AppContext);
+
+	useEffect(() => {
+		if (inView) {
+			setNavBackgroundColor("main-color");
+		}
+	}, [inView, setNavBackgroundColor]);
+
 	return (
 		<section
 			id='aboutus'
 			className='about'
+			ref={ref}
 		>
 			<div className='about-img'>
 				<img

@@ -1,7 +1,23 @@
+import { useInView } from "react-intersection-observer";
 import AdvancedItem from "../../../assets/videos/Ola-Tomasiewicz-rozbudowana-strona-gif.gif";
 import { ProductComponent } from "../ProductComponent/ProductComponent";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../../context/AppContext";
 
 export const AdvancedProject = () => {
+
+	const { ref, inView } = useInView({
+		threshold: 0.7,
+	});
+
+	const { setNavBackgroundColor } = useContext(AppContext);
+
+	useEffect(() => {
+		if (inView) {
+			setNavBackgroundColor("break-color");
+		}
+	}, [inView, setNavBackgroundColor]);
+
 	return (
 		<ProductComponent
 			sectionId='advancedproject'
@@ -17,7 +33,7 @@ export const AdvancedProject = () => {
 						treści w sposób przejrzysty i zorganizowany, zapewniający efektywną
 						komunikację z odwiedzającymi.
 					</p>
-					<h5>Więcej miejsca na unikalne treści</h5>
+					<h5 ref={ref}>Więcej miejsca na unikalne treści</h5>
 					<p>
 						Zawartość strony podzielona jest na kilka tematycznych podstron, a
 						każda z nich może mieć swój unikalny wygląd, dostosowany do

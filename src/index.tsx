@@ -6,19 +6,24 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Offer } from "./pages/offer/Offer";
 import { CommonLayout } from "./Layout/CommonLayout";
+import { OnePage } from "./pages/offer/OnePage/OnePage";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <CommonLayout />,
 		children: [
-			{
+			{	path:"/",
 				index: true,
 				element: <App />,
 			},
 			{
 				path: "/offer",
 				element: <Offer />,
+				children:[{
+					path:"/offer/onepage",
+					element:<OnePage/>
+			}],
 			},
 		],
 	},

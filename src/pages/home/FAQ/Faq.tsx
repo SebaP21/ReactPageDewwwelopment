@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaqItem, FaqItemProps } from "./FAQComponents/FaqItem";
 import { SectionHeading } from "../../../Components/SectionHeading/SectionHeading";
+import { useInView } from "react-intersection-observer";
+import { AppContext } from "../../../context/AppContext";
 // import { useState } from "react";
 
 export const Faq = () => {
 	const [expandedItemId, setExpandedItemId] = useState<number | undefined>(0);
+	const { ref, inView } = useInView();
+	const { setNavBackgroundColor } = useContext(AppContext);
 
 	const handleExpand = (index: number) => {
 		setExpandedItemId((prev) => {
@@ -16,18 +20,24 @@ export const Faq = () => {
 		});
 	};
 
+	useEffect(() => {
+		if (inView) {
+			setNavBackgroundColor("main-color");
+		}
+	}, [inView,setNavBackgroundColor]);
+
 	return (
 		<>
 			<section
 				id='faq'
 				className='faq'
-
-				>
+				ref={ref}
+			>
 				<SectionHeading
-				ctaHeader="Najczęściej zadawane pytania"
-				mainHeader="FAQ"
-				sectionDescription="Nie znalazłeś odpowiedzi na swoje pytanie?Zadzwoń do Nas lub skorzystaj z formularza kontaktowego"
-				className="faq-titles"
+					ctaHeader='Najczęściej zadawane pytania'
+					mainHeader='FAQ'
+					sectionDescription='Nie znalazłeś odpowiedzi na swoje pytanie?Zadzwoń do Nas lub skorzystaj z formularza kontaktowego'
+					className='faq-titles'
 				/>
 				<div className='faq-body'>
 					{faqItemData.map((data, index) => (

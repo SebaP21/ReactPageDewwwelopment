@@ -1,14 +1,31 @@
+import { useInView } from "react-intersection-observer";
 import {
 	HeaderProps,
 	SectionHeading,
 } from "../../../Components/SectionHeading/SectionHeading";
 import { SupportCard, SupportCardProps } from "./SupportCard/SupportCard";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../../context/AppContext";
 
 export const Support = () => {
+
+	const { ref, inView } = useInView({
+		threshold: 0.5,
+	});
+
+	const { setNavBackgroundColor } = useContext(AppContext);
+
+	useEffect(() => {
+		if (inView) {
+			setNavBackgroundColor("break-color");
+		}
+	}, [inView, setNavBackgroundColor]);
+
 	return (
 		<section
 			id='support'
 			className='support'
+			ref={ref}
 		>
 			<SectionHeading {...supportHeaderData[0]} />
 

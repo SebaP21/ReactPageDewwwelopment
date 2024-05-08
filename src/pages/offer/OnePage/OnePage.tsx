@@ -1,10 +1,27 @@
+import { useInView } from "react-intersection-observer";
 import OnePageItem from "../../../assets/videos/Uslugi_remontowo-budowlane_Piotr_Portka__Tomaszow_Lubelski_-_Google_Chrome_2023-06-23_21-30-01_AdobeExpress-1.gif";
 import {
 	ProductComponent,
 	ProductProps,
 } from "../ProductComponent/ProductComponent";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../../context/AppContext";
 
 export const OnePage = () => {
+
+	const { ref, inView } = useInView({
+		threshold: 0.9,
+	});
+
+	const { setNavBackgroundColor } = useContext(AppContext);
+
+	useEffect(() => {
+		if (inView) {
+			setNavBackgroundColor("main-color");
+		}
+	}, [inView, setNavBackgroundColor]);
+
+
 	return (
 		<ProductComponent
 			sectionId='onepage'
@@ -12,13 +29,13 @@ export const OnePage = () => {
 			sectionTitle='one-page'
 			productDescription={
 				<>
-					<h3>Strony internetowe - wizytówki</h3>
+					<h3 ref={ref}>Strony internetowe - wizytówki</h3>
 					<p>
 						Strona wizytówka typu “one-page” to doskonałe rozwiązanie dla małych
 						firm, startupów, czy osób, które chcą stworzyć stronę wizytówkę lub
 						landing page w nowoczesny sposób.
 					</p>
-					<h5>Wszystkie informacje na jednej stronie</h5>
+					<h5 ref={ref}>Wszystkie informacje na jednej stronie</h5>
 					<p>
 						Cechą charakterystyczną tego typu stron jest umieszczenie całej
 						zawartości strony na jednym ekranie, bez konieczności przechodzenia

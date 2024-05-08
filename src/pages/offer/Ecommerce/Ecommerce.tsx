@@ -1,7 +1,23 @@
+import { useInView } from "react-intersection-observer";
 import EccommerceItem from "../../../assets/img/Dewwwelopment-sklep-intenetowy.jpg";
 import { ProductComponent } from "../ProductComponent/ProductComponent";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../../context/AppContext";
 
 export const Ecommerce = () => {
+
+	const { ref, inView } = useInView({
+		threshold: 0.5,
+	});
+
+	const { setNavBackgroundColor } = useContext(AppContext);
+
+	useEffect(() => {
+		if (inView) {
+			setNavBackgroundColor("main-color");
+		}
+	}, [inView, setNavBackgroundColor]);
+
 	return (
 		<ProductComponent
 			sectionId='ecommerce'
@@ -9,7 +25,7 @@ export const Ecommerce = () => {
 			sectionTitle='e-commerce'
 			productDescription={
 				<>
-					<h3>Sklepy internetowe</h3>
+					<h3 ref={ref}>Sklepy internetowe</h3>
 					<p>
 						Kompleksowe rozwiązanie dla przedsiębiorców, którzy chcą prowadzić
 						sprzedaż swoich produktów lub usług w sieci. Możesz rozwinąć swój

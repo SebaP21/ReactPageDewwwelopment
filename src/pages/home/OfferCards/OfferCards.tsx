@@ -2,33 +2,38 @@ import { OfferCard, OfferCardProps } from "./OfferCard/OfferCard";
 import onePageIcon from "../../../assets/icons/web-programming-2.svg";
 import advancedIcon from "../../../assets/icons/coding-1.svg";
 import ecommerce from "../../../assets/icons/ecommerce-1.svg";
-// import { useInView } from "react-intersection-observer";
+import { useInView } from "react-intersection-observer";
 import individual from "../../../assets/icons/star-2.svg";
 import Training from "../../../assets/icons/graduate-1.svg";
 import Support from "../../../assets/icons/settings-2.svg";
 import { SectionHeading } from "../../../Components/SectionHeading/SectionHeading";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../../context/AppContext";
 
 export const Offerbox = () => {
-	// const { ref, inView } = useInView();
+	const { ref, inView } = useInView({
+		threshold: 0.5,
+	});
 
-	// console.log(inView, "Offerbox in view");
+	const { setNavBackgroundColor } = useContext(AppContext);
+
+	useEffect(() => {
+		if (inView) {
+			setNavBackgroundColor("break-color");
+		}
+	}, [inView, setNavBackgroundColor]);
+
 	return (
 		<section
 			id='all-offer'
 			className='services-box'
-			// ref={ref}
+			ref={ref}
 		>
-
 			<SectionHeading
-			ctaHeader="co oferujemy?"
-			mainHeader="usługi"
-			className="services-title"
+				ctaHeader='co oferujemy?'
+				mainHeader='usługi'
+				className='services-title'
 			/>
-			{/* <div className='services-title'>
-				<span className='decoration-line'></span>
-				<h4>Co oferujemy?</h4>
-				<h2>usługi</h2>
-			</div> */}
 			<div className='services-cards-box'>
 				{offerCardsData.map((data, index) => (
 					<OfferCard

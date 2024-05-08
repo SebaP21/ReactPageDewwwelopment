@@ -1,13 +1,28 @@
+import { useInView } from "react-intersection-observer";
 import { SectionHeading } from "../../../Components/SectionHeading/SectionHeading";
 import logo from "../../../assets/img/dewwwelopment-low-resolution-logo-black-on-transparent-background-3.png";
 import { ContactForm } from "./Form/Form";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../../../context/AppContext";
 
 export const Contact = () => {
+	const { ref, inView } = useInView({
+		threshold:0.3});
+
+	const { setNavBackgroundColor } = useContext(AppContext);
+
+	useEffect(() => {
+		if (inView) {
+			setNavBackgroundColor("main-color");
+		}
+	}, [inView,setNavBackgroundColor]);
+
 	return (
 		<>
 			<section
 				id='contact'
 				className='contact'
+				ref={ref}
 			>
 				<SectionHeading
 					ctaHeader='Umów się na bezpłatną wycenę'
@@ -15,12 +30,6 @@ export const Contact = () => {
 					sectionDescription='Zadzwoń lub skorzystaj z formularza kontaktowego i wyślij wiadomość'
 					className='contact-titles'
 				/>
-				<div className='alert'>
-					<p
-						className='alert-text'
-						id='alert-text'
-					></p>
-				</div>
 				<div className='contact-wrapper'>
 					<div className='contact-items'>
 						<a href='#home'>
@@ -44,6 +53,3 @@ export const Contact = () => {
 		</>
 	);
 };
-
-
-	

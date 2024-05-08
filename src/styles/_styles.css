@@ -91,7 +91,7 @@
 	color: var(--light-color);
 	text-shadow: 0 0 5px var(--dark-color);
 }
-.accent-color {
+/* .accent-color {
 	background-color: var(--nav-accent-color);
 	max-height: 9vh;
 	padding: 0;
@@ -99,7 +99,7 @@
 }
 .accent-color ul li a {
 	text-shadow: 3px 3px 5px var(--break-color);
-}
+} */
 .break-color {
 	background-color: var(--nav-break-color);
 	max-height: 9vh;

@@ -1,12 +1,16 @@
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../../../context/AppContext";
 
 export const CtaSteps = () => {
 	const { ref: CtaSteps, inView } = useInView();
 	const [count, setCount] = useState(1);
 
+	const { setNavBackgroundColor } = useContext(AppContext);
+
 	useEffect(() => {
 		if (inView && count === 1) {
+			setNavBackgroundColor("break-color");
 			const interval = setInterval(() => {
 				setCount((prev) => {
 					const newCount = prev + 1;
@@ -19,7 +23,7 @@ export const CtaSteps = () => {
 				clearInterval(interval);
 			};
 		}
-	}, [inView]);
+	}, [inView, setNavBackgroundColor]);
 
 	return (
 		<section
